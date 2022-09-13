@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --item-width: 188px;
+  --item-height: 35px;
+  --column-width: 200px;
+}
+
+body {
+  padding: 30px;
+  color: #333;
+}
+
+.board {
+  display: flex;
+}
+
+.column {
+  background-color: white;
+  width: var(--column-width);
+  border: 1px dotted #ccc;
+  border-radius: 5px;
+  margin-right: 20px;
+  padding: 5px;
+}
+
+.board-column-header {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  cursor: move;
+}
+
+.board-item {
+  background-color: #efffde;
+  border: 1px dotted #9ecda8;
+  border-radius: 5px;
+  padding: 7px;
+  cursor: move;
+  margin-bottom: 0.5em;
+  width: var(--item-width);
+  height: var(--item-height);
+}
+
+.board-item-content {
+  pointer-events: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.placeholder {
+  background-color: white;
+  margin-bottom: 0.5em;
+  width: var(--item-width);
+  height: var(--item-height);
+}
+
+.emptySectionHiddenLesson {
+  background: none;
+  border: none;
+  width: var(--item-width);
+  height: var(--item-height);
+}
+
+.placeholder-column {
+  background-color: white;
+  width: var(--column-width);
+  border: none;
+  margin-right: 20px;
+  padding: 5px;
+}
