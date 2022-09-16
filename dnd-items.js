@@ -39,8 +39,12 @@
     if (!isDraggingStarted) {
       isDraggingStarted = true;
       createPlaceholder();
-      movingElement.style.position = "absolute";
-      movingElement.style.zIndex = 1000;
+      Object.assign(movingElement.style, {
+        position: "absolute",
+        zIndex: 1000,
+        left: `${initialMovingElementPageXY.x}px`,
+        top: `${initialMovingElementPageXY.y}px`,
+      });
     }
     moveAt(movingElement, event.pageX, event.pageY);
 
@@ -94,8 +98,13 @@
     );
 
     placeholder.parentNode.insertBefore(movingElement, placeholder);
-    movingElement.style.position = "static";
-    movingElement.style.zIndex = "auto";
+    Object.assign(movingElement.style, {
+      position: "static",
+      left: "auto",
+      top: "auto",
+      zIndex: "auto",
+      transform: "none",
+    });
     document.removeEventListener("mousemove", onMouseMove);
     isDraggingStarted = false;
     placeholder && placeholder.parentNode.removeChild(placeholder);
@@ -109,6 +118,7 @@
   const onMouseDown = (event) => {
     setMovingElement(event);
     shifts.set(event.clientX, event.clientY, movingElement);
+    initialMovingElementPageXY.set(movingElement);
     document.addEventListener("mousemove", onMouseMove);
     movingElement.onmouseup = onMouseUp;
   };

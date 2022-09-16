@@ -1,3 +1,16 @@
+// Initial pageX and pageY of movingElement, at the moment the drag begins
+const initialMovingElementPageXY = {
+  x: 0,
+  y: 0,
+  set: (movingElement) => {
+    const rect = movingElement.getBoundingClientRect();
+    initialMovingElementPageXY.x = rect.x + window.scrollX;
+    initialMovingElementPageXY.y = rect.y + window.scrollY;
+  },
+};
+
+// Shifts allowing drag for any point of movingElement.
+// Stores x and y shifts from top left corner of movingElement to the point of drag
 const shifts = {
   shiftX: 0,
   shiftY: 0,
@@ -8,8 +21,10 @@ const shifts = {
 };
 
 const moveAt = (element, pageX, pageY) => {
-  element.style.left = pageX - shifts.shiftX + "px";
-  element.style.top = pageY - shifts.shiftY + "px";
+  // Moves element to pageX and pageY coordinates using fast CSS transform method
+  element.style.transform = `translate(${
+    pageX - initialMovingElementPageXY.x - shifts.shiftX
+  }px, ${pageY - initialMovingElementPageXY.y - shifts.shiftY}px)`;
 };
 
 const getElementCoordinates = (node, searchCoordsBy) => {
